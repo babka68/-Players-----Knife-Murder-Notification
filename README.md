@@ -1,4 +1,4 @@
-# -Players-----Knife-Murder-Notification
+# -Players---Knife-Murder-Notification
 Текстовое уведомление об убийстве ножом
 ![1](https://github.com/babka68/-Players-----Knife-Murder-Notification/assets/30433617/b286dfe2-589d-4c0c-b7be-f0e7778c2ecc)
 - Установка:
