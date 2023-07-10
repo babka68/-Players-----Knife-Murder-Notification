@@ -162,15 +162,38 @@ public Action Event_Player_Death(Event event, const char[] name, bool dontBroadc
 		
 		if (StrEqual(weapon_Name, "knife"))
 		{
+			/* =============================================================================================================
+			// EN: Create local static integer variables and call them killer and victim.
+			// RU: Создаем локальные статические целочисленные переменные и назовем их killer и victim.
+			// =============================================================================================================*/
 			static int killer, victim;
 			
+			/* =============================================================================================================
+			// EN: GetClientOfUserId - Translates an userid index to the real player index.
+			// RU: GetClientOfUserId - Преобразует индекс идентификатора пользователя в индекс реального игрока.
+			// =============================================================================================================*/
 			killer = GetClientOfUserId(event.GetInt("attacker"));
 			victim = GetClientOfUserId(event.GetInt("userid"));
 			
+			/* =============================================================================================================
+			// EN: killer && victim > 0 - Check if there is a player on the server (that is, exclude the case when the index is 0)
+			// EN: IsClientInGame(killer) and IsClientInGame(victim) - Check if there is a specific player on the server under the index in the range from 1 to MaxClients.
+			// RU: killer && victim > 0 - Проверяем есть ли игрок на сервере (то есть исключаете случай, когда индекс равен 0)
+			// RU: IsClientInGame(killer) и IsClientInGame(victim) - Проверяем, есть ли на сервере конкретный игрок под индексом в интервале от 1 до MaxClients.
+			// =============================================================================================================*/
 			if (killer && victim > 0 && IsClientInGame(killer) && IsClientInGame(victim))
 			{
+				
+				/* =============================================================================================================
+				// EN: GetClientTeam - We exclude the case that the killer is on the same team as the victim.
+				// RU: GetClientTeam - Исключаем случай, что убийа находится в одной команде с жертвой.
+				// =============================================================================================================*/
 				if (GetClientTeam(killer) != GetClientTeam(victim))
 				{
+					/* =============================================================================================================
+					// EN: Sprint - We notify the players that such and such a player killed such and such a player with a knife.
+					// RU: CPrint - Оповещаем игроков, что такой то игрок убил такого то игрока с ножа.
+					// =============================================================================================================*/
 					CPrint(killer, _, "{#00FF00}%s {#FFFFFF} Игрок {team}%N {#FFFFFF} убил ножом {#6A5ACD}%N", g_sKnife_Murder_Prefix, killer, victim);
 				}
 			}
